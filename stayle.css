@@ -14,7 +14,9 @@ body {
     padding: 20px;
     overflow-x: hidden;
 }
-
+#dani{
+ font-size: 100px;   
+}
 .container {
     background: white;
     border-radius: 20px;
