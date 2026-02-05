@@ -1,4 +1,5 @@
 // Game state
+
 let gameState = {
     players: [
         { total: 0, current: 0, name: 'שחקן 1' },
@@ -21,7 +22,7 @@ const diceFaces = {
 };
 
 // Update display
-function updateDisplay() {
+function updateDisplay(x) {
     document.getElementById('player1Total').textContent = gameState.players[0].total;
     document.getElementById('player1Current').textContent = gameState.players[0].current;
     document.getElementById('player2Total').textContent = gameState.players[1].total;
@@ -31,7 +32,7 @@ function updateDisplay() {
     const player1Card = document.getElementById('player1Card');
     const player2Card = document.getElementById('player2Card');
     
-    if (gameState.currentPlayer === 0) {
+    if (gameState.currentPlayer === x) {
         player1Card.classList.add('active');
         player2Card.classList.remove('active');
         player1Card.querySelector('.current-turn').textContent = 'תורך!';
@@ -48,10 +49,8 @@ function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-// function dd(){
-//     const x = document.getElementById("dice2").textContent = 
-//  } 
-const random = document.querySelector('#dani').textContent=randomInt(20,30)
+ 
+const random = document.querySelector('#dani').textContent=randomInt(50,100)
 
 
 
@@ -208,10 +207,14 @@ function newGame() {
     gameState.currentPlayer = 0;
     gameState.gameActive = true;
     gameState.rolling = false;
+    const x = randomInt(0,1)
     
-    updateDisplay();
-    drawDice(1);
+    updateDisplay(x);
+    drawDice1(1);
+    drawDice2(1);
+
     document.getElementById('resultMessage').textContent = '';
+
 }
 
 // Game mode buttons
@@ -225,11 +228,9 @@ document.querySelectorAll('.mode-btn').forEach(btn => {
         gameState.gameMode = btn.dataset.mode;
         
         // Update player 2 name
-        if (gameState.gameMode === 'pvc') {
-            document.querySelector('#player2Card h3').textContent = '🤖 מחשב';
-        } else {
+        
             document.querySelector('#player2Card h3').textContent = '👤 שחקן 2';
-        }
+       
         
         newGame();
     });
@@ -275,4 +276,5 @@ function createConfetti() {
 
 // Initialize
 updateDisplay();
-drawDice(1);
+drawDice1(1);
+drawDice2(1)
